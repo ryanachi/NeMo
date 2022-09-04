@@ -1,0 +1,14 @@
+**Wrap-up notes from Internship 2022**
+**CABINET: Customizable Augmentation-Based Improvements to Named Entity Translation**
+
+Please see https://docs.google.com/presentation/d/1VIwathOnGGVNXl7qvxH2PqgRaRdZx-6jvd3fPXRbNrM/edit?usp=sharing for details and contact Abhinav Khattar (akhattar@) + Oleksii Kuchaiev (okuchaiev@) for urgent questions. There should also be a released arXiv preprint fairly soon.
+
+- `replace_nes_with_placeholders.py` is the script that does the bulk of the data augmentation work. You'll need this to replace named entities with their <NEi> tags. We used to have an option where the the target side NEs would be replaced by their source-side equivalents, but this didn't quite work out. Currently the script is designed for English-German, but it's not hard to extend this to other languages. You'll also note that NEs are currently detected by searching for capital-letter spans. Extending this to use spaCy instead would be beneficial, but take care not to lose too much on the latency side. LIVE DEMO: https://www.youtube.com/watch?v=ZcHvhwvmQWY
+
+- `examples/nlp/machine_translation/nmt_transformer_infer_custom_dict.py` is the other critical file. This one takes care of custom-dictionary translation. You should be able to use it exactly as you use `nmt_transformer_infer`, but you'll have to specify a custom dictionary file as well. Do be careful whether you're using Moses tokenization or not -- this can mess with the <NEi> tags. LIVE DEMO: https://youtu.be/NQ6NSRvOEkM
+
+- `read_wikidata_json.sh` takes care of automatically generating custom dictionaries from a Wikidata dump. You'll have to specify which directory to save your custom dictionary in.
+
+Please contact me if you have any questions!
+
+-- Ryan (ryanchi@cs.stanford.edu)
